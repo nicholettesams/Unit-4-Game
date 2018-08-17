@@ -1,3 +1,7 @@
+body{
+    background: url("../images/bluebackground.jpg");   
+}
+
 img{
     height: 200;
     width: auto;
