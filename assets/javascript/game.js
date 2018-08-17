@@ -28,6 +28,9 @@ var Raichu = {
     counterAttackPower: 50
 };
 
+var character = "";
+var defender = "";
+
 var outputData = function(){
     console.log("outputData")
     
@@ -55,11 +58,17 @@ var updateHTML = function(tag, value, append){
 //Setup/Reset game
 
 //User selects character, move other 3 characters to new section
+$(".pokemon").on("click", function() {
+    character = this;
+});
 
+//set all as defenders that are not the chosen one from above
+defe.addClass("defender");
 
-//User selects defender, move defender to new section
-
-
+//User selects defender, move defenders to new section
+$(".pokemon").on("click", function() {
+    defender = this;
+});
 
 //Each attack - When user clicks Attack button
 var $attackBtn = $("#attack");
