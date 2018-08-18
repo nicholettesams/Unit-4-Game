@@ -2,34 +2,50 @@
 //Probably would be better to have a class called Pokemon and then create new objects of the Pokemon class
 var Venusar = {
     name:"Vemusar", 
-    hp: 100, 
-    attackPower:9,
-    counterAttackPower: 50
+    defaultHP: 100, 
+    currentHP: 100,
+    defaultAttackPower:9,
+    currentAttackPower: 9, //Keeps track of increasing attackPower after each attack
+    counterAttackPower: 50,
+    resetAttackPower: function() {this.currentAttackPower = this.defaultAttackPower;},
+    resetHP: function() {this.currentHP = this.defaultHP;}
 };
 
 var Blastoise = {
     name:"Blastoise", 
-    hp: 100, 
-    attackPower:11,
-    counterAttackPower: 50
+    defaultHP: 100, 
+    currentHP: 100,
+    defaultAttackPower:11,
+    currentAttackPower:11,
+    counterAttackPower: 50,
+    resetAttackPower: function() {this.currentAttackPower = this.defaultAttackPower;},
+    resetHP: function() {this.currentHP = this.defaultHP;}
 };
 
 var Charizard = {
     name:"Charizard", 
-    hp: 100, 
-    attackPower:7,
-    counterAttackPower: 50
+    defaultHP: 100, 
+    currentHP: 100, 
+    defaultAttackPower:7,
+    currentAttackPower:7,
+    counterAttackPower: 50,
+    resetAttackPower: function() {this.currentAttackPower = this.defaultAttackPower;},
+    resetHP: function() {this.currentHP = this.defaultHP;}
 };
 
 var Raichu = {
     name:"Raichu", 
-    hp: 100, 
-    attackPower:5,
-    counterAttackPower: 50
+    defaultHP: 100, 
+    currentHP: 100, 
+    defaultAttackPower:5,
+    currentAttackPower:5,
+    counterAttackPower: 50,
+    resetAttackPower: function() {this.currentAttackPower = this.defaultAttackPower;},
+    resetHP: function() {this.currentHP = this.defaultHP;}
 };
 
-var character = "";
-var defender = "";
+var character = ""; //character chosen by user
+var defender = ""; //current defender
 
 var outputData = function(){
     console.log("outputData")
@@ -49,23 +65,21 @@ var updateHTML = function(tag, value, append){
     element.textContent = tempValue;
 }
 
-
-
-
 /***************/
 /*  Game Play  */
 /***************/
 //Setup/Reset game
 
-//User selects character, move other 3 characters to new section
+//User selects character, character to new section
 $(".pokemon").on("click", function() {
     character = this;
+
+    //set all as defenders that are not the chosen one from above
+    
 });
 
-//set all as defenders that are not the chosen one from above
-defe.addClass("defender");
 
-//User selects defender, move defenders to new section
+//User selects defender, move defender to new section
 $(".pokemon").on("click", function() {
     defender = this;
 });
@@ -75,6 +89,7 @@ var $attackBtn = $("#attack");
 $attackBtn.on("click", function() {
     //User character attack power increases by it's base attack power
     //defender attack power never changes
+    character.currentAttackPower += character.attackPower
 
     //Decrease user hp and defender hp
 
@@ -90,5 +105,12 @@ $attackBtn.on("click", function() {
 
 //Restart game
 $("#restart").on("click", function() {
-    
+    Blastoise.resetAttackPower;
+    Blastoise.resetHP;
+    Charizard.resetAttackPower;
+    Charizard.resetHP;
+    Venusar.resetAttackPower;
+    Venusar.resetHP;
+    Raichu.resetAttackPower;
+    Raichu.resetHP;
 });
