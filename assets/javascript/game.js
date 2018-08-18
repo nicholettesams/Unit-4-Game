@@ -94,8 +94,8 @@ $attackBtn.on("click", function() {
     //Decrease user hp and defender hp
 
     //Log attacks to the screen
-    updateHTML("attack-log", "You attacked " + defender + "for " + attackPower + "damage.", true);
-    updateHTML("attack-log", defender + " + attacked you back for " + counterAttackPower + "damage.", true);
+    updateHTML("attack-log", "You attacked " + defender.name + "for " + character.currentAttackPowerattackPower + "damage.", true);
+    updateHTML("attack-log", defender.name + " + attacked you back for " + defender.counterAttackPower + "damage.", true);
 });
 
 //Check to see if won/lost
