@@ -49,7 +49,12 @@ var defender = ""; //current defender
 
 var outputData = function(){
     console.log("outputData")
-    
+    for(var prop in character){
+        console.log(character[prop]);
+    }
+    for(var prop in defender){
+    console.log(defender[prop]);
+    }
 }
 
 var updateHTML = function(tag, value, append){
@@ -87,11 +92,13 @@ $(".pokemon").on("click", function() {
 //Each attack - When user clicks Attack button
 var $attackBtn = $("#attack");
 $attackBtn.on("click", function() {
+    //Decrease user hp and defender hp
+    character.currentHP -= defender.counterAttackPower;
+    defender.currentHP -= character.currentAttackPower;
+    
     //User character attack power increases by it's base attack power
     //defender attack power never changes
     character.currentAttackPower += character.attackPower
-
-    //Decrease user hp and defender hp
 
     //Log attacks to the screen
     updateHTML("attack-log", "You attacked " + defender.name + "for " + character.currentAttackPowerattackPower + "damage.", true);
