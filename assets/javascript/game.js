@@ -30,6 +30,8 @@ $(document).ready(function() {
             character.detach().appendTo("#character-section");
             characterCurrentHP = Number(character.attr("defaultHP"));
             characterCurrentAttackPower = Number(character.attr("defaultAttackPower"));
+            $("#enemy-section").text("Enemies Available to Attack");
+            $("#enemy-section").addClass("enemy");
         } 
         outputData(); 
     });
@@ -50,6 +52,12 @@ $(document).ready(function() {
         $("#attack-log").append("<p>" + defender.attr("name") + " attacked you back for " + defender.attr("counterAttackPower") + " damage. </p>");
     
         outputData();
+
+        //If defender HP = 0, remove image
+        if (defenderCurrentHP === 0) {
+            defender.detach()
+        }
+
         //Check to see if won/lost
         //If user HP = 0, you lost
         //If no more defenders left and current defender's HP = 0, you won
