@@ -64,14 +64,12 @@ $(document).ready(function() {
     
         //Check to see if won/lost
         //If user HP = 0, you lost
+        //If no more defenders left and current defender's HP = 0, you won
         if (characterCurrentHP = 0){
             alert("You lost!");
-        }
-        //If all defender's HP = 0, you won
-        if (defender.defenderCurrentHP && isEmpty($("#start"))){
+        } else if (defenderCurrentHP === 0 && $("#start").is(":empty")){
             alert("You won!");
         }
-    
     });
 
     //Restart game
