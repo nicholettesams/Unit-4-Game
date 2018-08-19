@@ -1,13 +1,16 @@
 var character = ""; //character chosen by user
 var defender = ""; //current defender
 var characterCurrentHP = 0;
-var characterCurrentAttachPower = 0;
+var characterCurrentAttackPower = 0;
 var defenderCurrentHP = 0;
 
 var outputData = function(){
     console.log("outputData")
-    console.log("current character:" + character);
-    console.log("current defender"  + defender);
+    console.log("current character: " + character);
+    console.log("current defender: " + defender);
+    console.log("characterCurrentHP: " + characterCurrentHP);
+    console.log("defenderCurrentHP: " + defenderCurrentHP);
+    console.log("characterCurrentAttackPower: " + characterCurrentAttackPower);
 }
 
 var updateHTML = function(tag, value, append){
@@ -31,20 +34,18 @@ $(document).ready(function() {
     //User selects character, character to new section
     $(".pokemon").on("click", function() {
         if (character) {
-            defender = this;
+            defender = $(this);
             //character.addClass("defender");
-            $(defender).detach().appendTo("#defender-section");
-            defenderCurrentHP = defender.attr("defaultHP");
+            defender.detach().appendTo("#defender-section");
+            defenderCurrentHP = Number(defender.attr("defaultHP"));
         } else {
-            character = this;
+            character = $(this);
             //character.addClass("character");
-            $(character).detach().appendTo("#character-section");
-            characterCurrentHP = character.attr("defaultHP");
-        }
-        
-        outputData();
-        //set all as defenders that are not the chosen one from above
-        
+            character.detach().appendTo("#character-section");
+            characterCurrentHP = Number(character.attr("defaultHP"));
+            characterCurrentAttackPower = Number(character.attr("defaultAttackPower"));
+        } 
+        outputData(); 
     });
 
     //Each attack - When user clicks Attack button
@@ -52,16 +53,17 @@ $(document).ready(function() {
     $attackBtn.on("click", function() {
         //Decrease user hp and defender hp
         characterCurrentHP -= defender.attr("counterAttackPower") ;
-        defenderCurrentHP -= characterCurrentAttachPower;
+        defenderCurrentHP -= characterCurrentAttackPower;
 
         //User character attack power increases by it's base attack power
         //defender attack power never changes
-        characterCurrentAttackPower += character.attr("defaultAttackPower");
+        characterCurrentAttackPower += Number(character.attr("defaultAttackPower"));
 
         //Log attacks to the screen
-        updateHTML("attack-log", "You attacked " + defender.name + "for " + characterCurrentAttackPower + "damage. <br>", true);
-        updateHTML("attack-log", defender.name + " + attacked you back for " + defender.attr("counterAttackPower") + "damage. <br>", true);
+        updateHTML("attack-log", "You attacked " + defender.attr("name") + " for " + characterCurrentAttackPower + " damage. \r\n", true);
+        updateHTML("attack-log", defender.attr("name") + " attacked you back for " + defender.attr("counterAttackPower") + " damage. \r\n", true);
     
+        outputData();
         //Check to see if won/lost
         //If user HP = 0, you lost
         //If no more defenders left and current defender's HP = 0, you won
