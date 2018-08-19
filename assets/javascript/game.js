@@ -12,20 +12,6 @@ var outputData = function(){
     console.log("defenderCurrentHP: " + defenderCurrentHP);
     console.log("characterCurrentAttackPower: " + characterCurrentAttackPower);
 }
-
-var updateHTML = function(tag, value, append){
-    var element = document.getElementById(tag);
-    var tempValue = "";
-
-    if (append){
-        tempValue = element.textContent + value;
-    } else {
-        tempValue = value;
-    }
-
-    element.textContent = tempValue;
-}
-
 /***************/
 /*  Game Play  */
 /***************/
@@ -60,8 +46,8 @@ $(document).ready(function() {
         characterCurrentAttackPower += Number(character.attr("defaultAttackPower"));
 
         //Log attacks to the screen
-        updateHTML("attack-log", "You attacked " + defender.attr("name") + " for " + characterCurrentAttackPower + " damage. \r\n", true);
-        updateHTML("attack-log", defender.attr("name") + " attacked you back for " + defender.attr("counterAttackPower") + " damage. \r\n", true);
+        $("#attack-log").append("<p>You attacked " + defender.attr("name") + " for " + characterCurrentAttackPower + " damage. </p>");
+        $("#attack-log").append("<p>" + defender.attr("name") + " attacked you back for " + defender.attr("counterAttackPower") + " damage. </p>");
     
         outputData();
         //Check to see if won/lost
