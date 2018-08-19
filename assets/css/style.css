@@ -19,7 +19,7 @@ img{
     background-color: white;
 }
 
-.enemy{
+.enemy img{
     border: 2px solid black; 
     background-color: red;
 }
@@ -31,5 +31,5 @@ img{
 
 .image-container{
     float: left;
-    margin: 20px;
+    margin-right: 20px;
 }
