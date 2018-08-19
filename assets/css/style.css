@@ -3,12 +3,18 @@ body{
 }
 
 img{
-    height: 200;
-    width: auto;
+    height: 200px;
+    width: 200px;
     border:2px solid black;
 }
 
-.character{
+#character-section{
+    width: 100%;
+    overflow: auto;
+    clear: both;
+}
+
+#character-section img{
     border:2px solid green; 
     background-color: white;
 }
@@ -18,7 +24,12 @@ img{
     background-color: red;
 }
 
-.defender{
+#defender-section img{
     border:2px solid green; 
     background-color: black;
+}
+
+.image-container{
+    float: left;
+    margin: 20px;
 }
