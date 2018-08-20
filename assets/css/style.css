@@ -6,9 +6,11 @@ img{
     height: 200px;
     width: 200px;
     border:2px solid black;
+    float: left;
+    margin-right: 20px;
 }
 
-#character-section{
+#fight-section{
     width: 100%;
     overflow: auto;
     clear: both;
@@ -24,12 +26,32 @@ img{
     background-color: red;
 }
 
+#character-section{
+    width: 50%;
+    float: left;
+}
+
+#defender-section{
+    width: 50%;
+    float: left;
+}
+
 #defender-section img{
     border:2px solid green; 
     background-color: black;
 }
 
 .image-container{
-    float: left;
-    margin-right: 20px;
+
+}
+
+p{
+    line-height: .5;
+}
+
+#log-section{
+    width: 100%;
+    overflow: auto;
+    clear: both;
+    margin-top: 30px;
 }
