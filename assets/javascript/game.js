@@ -87,9 +87,7 @@ $(document).ready(function() {
         console.log($("#start").contents().length);
         if (characterCurrentHP === 0){
             alert("You lost!");
-        } else if (defenderCurrentHP === 0 && $("#start:has(img)") === false){
-        //else if (defenderCurrentHP === 0 && $("#start").contents().length === 0) {
-        //else if (defenderCurrentHP === 0 && $("#start").is(":empty")){
+        } else if (defenderCurrentHP === 0 && $('#start').children().length === 0){
             alert("You won!");
         }
     });
