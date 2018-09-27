@@ -19,15 +19,18 @@ $(document).ready(function() {
     //User selects character, character to new section
     $(".pokemon").on("click", function() {
         if (character) {
-            defender = $(this);
-            defender.detach().appendTo("#defender-section");
-            defenderCurrentHP = Number(defender.attr("defaultHP"));
-            attackEnabled = true;
 
-            console.log("current defender: " + defender.attr("name"));
-            console.log("default HP defender: " + defender.attr("defaultHP"));
-            console.log("counter attack defender: " + defender.attr("counterAttackPower"));
+            if (!attackEnabled) {    
+                defender = $(this);
+                defender.detach().appendTo("#defender-section");
+                defenderCurrentHP = Number(defender.attr("defaultHP"));
+                attackEnabled = true;
+                hasDefender = true;
 
+                console.log("current defender: " + defender.attr("name"));
+                console.log("default HP defender: " + defender.attr("defaultHP"));
+                console.log("counter attack defender: " + defender.attr("counterAttackPower"));
+            }
         } else {
             character = $(this);
             character.detach().appendTo("#character-section");
