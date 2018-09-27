@@ -16,31 +16,25 @@ var outputData = function(){
 /***************/
 $(document).ready(function() {
 
-    //User selects character, character to new section
+    //User selects character, add character to new section
     $(".pokemon").on("click", function() {
         if (character) {
-
+            //if character has been chosen and a defender has not been chosen, 
+            //add to defender section
             if (!attackEnabled) {    
                 defender = $(this);
                 defender.detach().appendTo("#defender-section");
                 defenderCurrentHP = Number(defender.attr("defaultHP"));
                 attackEnabled = true;
-                hasDefender = true;
-
-                console.log("current defender: " + defender.attr("name"));
-                console.log("default HP defender: " + defender.attr("defaultHP"));
-                console.log("counter attack defender: " + defender.attr("counterAttackPower"));
             }
         } else {
+            //if character has not been chosen add to the character section
             character = $(this);
             character.detach().appendTo("#character-section");
             characterCurrentHP = Number(character.attr("defaultHP"));
             characterCurrentAttackPower = Number(character.attr("defaultAttackPower"));
             $("#enemy-section").text("Enemies Available to Attack");
             $("#enemy-section").addClass("enemy");
-
-            console.log("current character: " + character.attr("name"));
-            console.log("default HP character: " + character.attr("defaultHP"));
         } 
 
     });
@@ -48,17 +42,16 @@ $(document).ready(function() {
     //Each attack - When user clicks Attack button
     var $attackBtn = $("#attack");
     $attackBtn.on("click", function() {
+        //Validate that both character and defender have been chosen first
         if (attackEnabled === false){
             alert("Please select a character and a defender.")
             return;
         }
 
         //Decrease user hp and defender hp
-        console.log(characterCurrentHP + "-" + defender.attr("counterAttackPower"));
-        console.log(defenderCurrentHP + "-" + characterCurrentAttackPower);
         characterCurrentHP -= defender.attr("counterAttackPower") ;
         defenderCurrentHP -= characterCurrentAttackPower;
-        //don't allow negatives
+        //Don't allow negatives
         if (characterCurrentHP <= 0) {
             characterCurrentHP = 0;
         } 
@@ -72,12 +65,12 @@ $(document).ready(function() {
 
         //Log attacks to the screen
         $("#attack-log").empty();
-        $("#attack-log").append("<p>You attacked " + defender.attr("name") + " for " + characterCurrentAttackPower + " damage. </p>");
-        $("#attack-log").append("<p>" + defender.attr("name") + " attacked you back for " + defender.attr("counterAttackPower") + " damage. </p>");
-        $("#attack-log").append("<p>" + character.attr("name") + " HP: " + characterCurrentHP + "  " + defender.attr("name") + " HP: " + defenderCurrentHP + "</p>");
+        $("#attack-log").append("<p>You attacked " + defender.attr("name") + " for <strong>" + characterCurrentAttackPower + "</strong> damage. </p>");
+        $("#attack-log").append("<p>" + defender.attr("name") + " attacked you back for <strong>" + defender.attr("counterAttackPower") + "</strong> damage. </p>");
+        $("#attack-log").append("<p>" + character.attr("name") + " HP: <strong>" + characterCurrentHP + "</strong>  " + defender.attr("name") + " HP: <strong>" + defenderCurrentHP + "</strong></p>");
         outputData();
 
-        //If defender HP = 0, remove image
+        //If defender HP = 0, remove defender image
         if (defenderCurrentHP === 0) {
             defender.detach()
             $("#attack-log").append("<p>Select a new defender!</p>");
@@ -87,7 +80,6 @@ $(document).ready(function() {
         //Check to see if won/lost
         //If user HP = 0, you lost
         //If no more defenders left and current defender's HP <= 0, you won
-        console.log($("#start").contents().length);
         if (characterCurrentHP === 0){
             alert("You lost!");
         } else if (defenderCurrentHP === 0 && $('#start').children().length === 0){
